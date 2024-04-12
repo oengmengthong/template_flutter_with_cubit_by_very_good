@@ -1,0 +1,12 @@
+icon_font:
+  input_svg_dir: "assets/icons"
+  output_font_file: "assets/fonts/UiIcons.ttf"
+
+  output_class_file: "lib/src/resources/ui_icons.dart"
+  class_name: "UiIcons"
+  package: core_ui
+  format: true
+
+  font_name: "UiIcons"
+  ignore_shapes: true
+  normalize: true

@@ -1,0 +1,39 @@
+name: template_flutter_with_cubit_by_very_good
+
+sdkPath: .fvm/flutter_sdk
+ide:
+  intellij: true
+
+command:
+  environment:
+    sdk: ">=3.0.5 <4.0.0"
+    flutter: ">=3.13.6 <4.0.0"
+  bootstrap:
+    runPubGetInParallel: false
+
+packages:
+  - .
+
+scripts:
+  setup:
+    description: "Install necessary plug-ins and bootstrap the workspace"
+    run: |
+      dart pub global activate fvm && \
+      fvm install $FLUTTER_VERSION && \
+      fvm use $FLUTTER_VERSION && \
+      dart pub global activate spider && \
+      dart pub global activate flutterfire_cli && \
+      melos bootstrap
+    env:
+      FLUTTER_VERSION: 3.19.5
+  build_runner:
+    description: "Generate *.g.dart files on modules which depends on build_runner"
+    run: melos exec --depends-on="build_runner" fvm dart run build_runner build
+  pub:get:
+    description: "Run pub get on all packages"
+    run: melos exec -- fvm flutter pub get
+  gen-assets:
+    description: "Generate assets of images and icons"
+    run: |
+      melos exec -- \ spider build && \
+      melos exec -- \ fvm flutter pub run icon_font_generator:generator
