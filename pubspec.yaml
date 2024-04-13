@@ -43,7 +43,6 @@ dependencies:
   shared_preferences: ^2.2.3
   flutter_disk_lru_cache: ^1.0.1
   logger: ^1.4.0
-  firebase_core: ^2.29.0
 
 dev_dependencies:
   bloc_test: ^9.1.6
