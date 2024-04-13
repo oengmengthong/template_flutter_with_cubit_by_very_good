@@ -9,8 +9,6 @@ class AuthState {
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthState(false));
 
-  get authz => null;
-
   void logIn() {
     emit(AuthState(true));
   }
@@ -18,5 +16,4 @@ class AuthCubit extends Cubit<AuthState> {
   void logOut() {
     emit(AuthState(false));
   }
-
 }

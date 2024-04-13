@@ -15,7 +15,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
 
   final RoleGuard roleGuard;
   void Function()? _authListener;
-  // AuthCubit get _authz => GetIt.I<AuthCubit>();
+  AuthCubit get _authz => GetIt.I<AuthCubit>();
   @override
   final List<AutoRoute> routes;
 
