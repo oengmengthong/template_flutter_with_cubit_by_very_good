@@ -70,6 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '622682520129',
     projectId: 'flutter-cubit-development',
     storageBucket: 'flutter-cubit-development.appspot.com',
+    iosClientId: '622682520129-jge8b8b4e6mrba059srpq6sut43ehmt0.apps.googleusercontent.com',
     iosBundleId: 'com.development.app',
   );
+
 }

@@ -51,7 +51,8 @@ scripts:
   build:dev:
     description: "Run the app in debug mode"
     run: |
-      melos exec -- \ melos run firebase:dev && \
+      melos run firebase:dev && \
+      melos run firebase:deploy && \
       fvm flutter build apk --flavor development --target lib/main_development.dart
   build:staging:
     description: "Run the app in debug mode"
@@ -78,19 +79,25 @@ scripts:
     packageFilters:
       scope: "template_flutter_with_cubit_by_very_good"
   firebase:deploy:web:dev:
-    run: | 
+    run: |
+      melos run firebase:dev && \
+      melos run firebase:deploy && \
       fvm flutter build web --target lib/main_development.dart && \
       firebase deploy --only hosting
     packageFilters:
       scope: "template_flutter_with_cubit_by_very_good"
   firebase:deploy:web:staging:
-    run: | 
+    run: |
+      melos run firebase:staging && \
+      melos run firebase:deploy && \
       fvm flutter build web --target lib/main_staging.dart && \
       firebase deploy --only hosting
     packageFilters:
       scope: "template_flutter_with_cubit_by_very_good"
   firebase:deploy:web:prod:
     run: |
+      melos run firebase:prod && \
+      melos run firebase:deploy && \
       fvm flutter build web --target lib/main_production.dart && \
       firebase deploy --only hosting
     packageFilters:
