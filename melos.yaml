@@ -46,3 +46,55 @@ scripts:
   run:debug:production:
     description: "Run the app in debug mode"
     run: fvm flutter run --flavor production --target lib/main_production.dart
+
+  #Build
+  build:dev:
+    description: "Run the app in debug mode"
+    run: |
+      melos run firebase:dev && \
+      fvm flutter build apk --flavor development --target lib/main_development.dart
+  build:staging:
+    description: "Run the app in debug mode"
+    run:  |
+      melos run firebase:staging && \
+      fvm flutter build apk --flavor staging --target lib/main_staging.dart
+  build:production:
+    description: "Run the app in debug mode"
+    run:  |
+      melos run firebase:prod && \
+      fvm flutter build apk --flavor production --target lib/main_production.dart
+
+  # Firebase
+  firebase:dev:
+    run: flutterfire configure -p flutter-cubit-development -y --platforms=android,ios,web -a com.development.app -i com.development.app
+    packageFilters:
+      scope: "template_flutter_with_cubit_by_very_good"
+  firebase:staging:
+    run: flutterfire configure -p flutter-cubit-staging -y --platforms=android,ios,web -a com.staging.app -i com.staging.app
+    packageFilters:
+      scope: "template_flutter_with_cubit_by_very_good"
+  firebase:prod:
+    run: flutterfire configure -p flutter-cubit-production -y --platforms=android,ios,web -a com.production.app -i com.production.app
+    packageFilters:
+      scope: "template_flutter_with_cubit_by_very_good"
+  firebase:deploy:web:dev:
+    run: |
+      melos run firebase:dev && \
+      fvm flutter build web --target lib/main_development.dart && \
+      firebase deploy --only hosting
+    packageFilters:
+      scope: "template_flutter_with_cubit_by_very_good"
+  firebase:deploy:web:staging:
+    run: |
+      melos run firebase:staging && \
+      fvm flutter build web --target lib/main_staging.dart && \
+      firebase deploy --only hosting
+    packageFilters:
+      scope: "template_flutter_with_cubit_by_very_good"
+  firebase:deploy:web:prod:
+    run: |
+      melos run firebase:prod && \
+      fvm flutter build web --target lib/main_production.dart && \
+      firebase deploy --only hosting
+    packageFilters:
+      scope: "template_flutter_with_cubit_by_very_good"
