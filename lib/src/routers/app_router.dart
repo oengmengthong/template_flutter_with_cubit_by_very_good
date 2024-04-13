@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:get_it/get_it.dart';
+import 'package:template_flutter_with_cubit_by_very_good/src/feature/auth/cubit/auth_cubit.dart';
 import 'package:template_flutter_with_cubit_by_very_good/src/feature/counter/counter.dart';
 import 'guards.dart';
 
@@ -14,7 +15,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
 
   final RoleGuard roleGuard;
   void Function()? _authListener;
-  // AuthModel get _authz => GetIt.I<AppModel>().authz;
+  // AuthCubit get _authz => GetIt.I<AuthCubit>();
   @override
   final List<AutoRoute> routes;
 

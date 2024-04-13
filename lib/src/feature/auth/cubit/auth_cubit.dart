@@ -1,8 +1,22 @@
 import 'package:bloc/bloc.dart';
 
-class AuthCubit extends Cubit<bool> {
-  AuthCubit() : super(false);
+class AuthState {
+  final bool isAuthenticated;
 
-  void login() => emit(true);
-  void logout() => emit(false);
+  AuthState(this.isAuthenticated);
+}
+
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit() : super(AuthState(false));
+
+  get authz => null;
+
+  void logIn() {
+    emit(AuthState(true));
+  }
+
+  void logOut() {
+    emit(AuthState(false));
+  }
+
 }

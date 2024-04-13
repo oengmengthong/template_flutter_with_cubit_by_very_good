@@ -13,7 +13,7 @@ import 'src/di/injection.dart';
 
 Future<void> init(Server server) async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies(server);
+  await configureDependencies(server);
   await _clearStorage();
 
   await bootstrap(() => const App());
