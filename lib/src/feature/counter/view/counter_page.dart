@@ -24,9 +24,8 @@ class CounterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.counterAppBarTitle)),
+      appBar: AppBar(title: Text(context.l10n.counterAppBarTitle)),
       body: const Center(child: CounterText()),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -52,8 +51,7 @@ class CounterText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final count = context.select((CounterCubit cubit) => cubit.state);
-    return Text('$count', style: theme.textTheme.displayLarge);
+    return Text('$count');
   }
 }

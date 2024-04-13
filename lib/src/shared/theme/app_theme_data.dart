@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:template_flutter_with_cubit_by_very_good/src/shared/utils/generate_material_color.dart';
 
 import '../extensions/context_exts.dart';
+import 'app_theme.dart';
 
 class AppThemeData {
   const AppThemeData({
@@ -37,8 +38,10 @@ class AppThemeData {
     this.iconSize = const IconSize(),
     required this.segmentedTheme,
     required this.listTileTheme,
+    required this.appBarTheme,
   });
 
+  final AppBarTheme appBarTheme;
   final AppColors colors;
   final Color primaryBackgroundColor;
   final Color secondaryBackgroundColor;
@@ -76,6 +79,17 @@ class AppThemeData {
     const primaryTextColor = Colors.black;
     const secondaryTextColor = Color(0xFF8E8E8E);
     return AppThemeData(
+      appBarTheme: AppBarTheme(
+        color: Colors.white,
+        elevation: 1,
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontSize: 16.0,
+          color: primaryTextColor,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Jersey',
+        ),
+      ),
       primaryBackgroundColor: const Color(0xFFF7F7F7),
       secondaryBackgroundColor: Colors.white,
       primaryColor: const Color(0xFFFFBC00),
@@ -151,10 +165,100 @@ class AppThemeData {
     );
   }
 
+  factory AppThemeData.dark() {
+    const spacing = Spacing();
+    const primaryTextColor = Colors.white;
+    const secondaryTextColor = Color(0xFFBEBEBE); // Lightened for visibility
+    return AppThemeData(
+      appBarTheme: AppBarTheme(
+        color: Colors.black,
+        elevation: 1,
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontSize: 16.0,
+          color: primaryTextColor,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Jersey',
+        ),
+      ),
+      primaryBackgroundColor: const Color(0xFF1A1A1A),
+      secondaryBackgroundColor: const Color(0xFF2A2A2A),
+      primaryColor: const Color(0xFFFFBC00),
+      iconColor: Colors.white,
+      typography: const Typography(
+        titleTextColor: primaryTextColor,
+        bodyTextColor: primaryTextColor,
+        successTextColor: Color(0xff1BC200),
+      ),
+      unselectedColor: const Color(0xFF9C9C9C), // Lightened for visibility
+      disableButtonColor: const Color(0xffBEBEBE),
+      spacing: spacing,
+      secondaryColor: const Color(0xFFFCE9B7),
+      primaryContainerColor: const Color(0xFF2A2A2A),
+      dangerousColor: const Color(0xFFB42C2C),
+      errorColor: const Color(0xffB42C2C),
+      disabledColor: const Color(0xffBEBEBE), // Lightened for visibility
+      dividerColor: const Color(0xffE3E3E3),
+      borderColor: const Color(0xFFE3E3E3),
+      successColor: const Color(0xff1BC200),
+      darkGreyIconColor: const Color(0xff9C9C9C), // Lightened for visibility
+      greyTextColor: const Color(0xffBEBEBE), // Lightened for visibility
+      greyCircleColor: const Color(0xff9C9C9C), // Lightened for visibility
+      darkGreyCircleColor: const Color(0xff7C7C7C), // Lightened for visibility
+      greyContainerColor: const Color(0xffEBEBEB),
+      primaryTextColor: Colors.white,
+      secondaryTextColor: const Color(0xFFBEBEBE), // Lightened for visibility
+      tileColor: const Color(0xFF3A3A3A), // Darkened for visibility
+      boxShadow: const BoxShadow(
+        color: Color.fromRGBO(0, 0, 0, 0.1),
+      ),
+      segmentedTheme: const SegmentedTheme(
+        selectedBackgroundColor: Colors.white,
+        unselectedBackgroundColor: Color(0x36BEBEBE),
+        selectedTextColor: Color(0xFFFFBC00),
+        unselectedTextColor: Color(0xFFBEBEBE), // Lightened for visibility
+        minimumSize: Size.fromHeight(32.0),
+        textStyle: TextStyle(fontWeight: FontWeight.w500),
+      ),
+      listTileTheme: ListTileTheme(
+        threeLineCard: ListTileThemeData(
+          contentPadding: EdgeInsets.symmetric(
+            vertical: spacing.marginSmall,
+            horizontal: spacing.marginMedium,
+          ),
+          horizontalTitleGap: spacing.marginMedium,
+          tileColor: const Color(0xFF3A3A3A), // Darkened for visibility
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(color: Color(0xFFE3E3E3)),
+            borderRadius: BorderRadius.circular(
+              spacing.borderRadiusMedium,
+            ),
+          ),
+          titleAlignment: ListTileTitleAlignment.bottom,
+          titleTextStyle: const TextStyle(
+            fontSize: 15.0,
+            fontWeight: FontWeight.w500,
+            color: primaryTextColor,
+          ),
+          subtitleTextStyle: const TextStyle(
+            color: secondaryTextColor,
+            fontSize: 13.0,
+          ),
+        ),
+      ),
+    );
+  }
+
+  factory AppThemeData.system(BuildContext context) {
+    bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    return isDarkMode ? AppThemeData.dark() : AppThemeData.light();
+  }
+
   ThemeData build(BuildContext context) {
     final textTheme = typography.build(context);
     return ThemeData(
-      useMaterial3: false,
+      useMaterial3: true,
       fontFamily: 'Jersey',
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryBackgroundColor,
@@ -179,17 +283,7 @@ class AppThemeData {
         ),
         backgroundColor: primaryBackgroundColor,
       ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
-        elevation: 1,
-        centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontSize: 16.0,
-          color: primaryTextColor,
-          fontWeight: FontWeight.w500,
-          fontFamily: 'Jersey',
-        ),
-      ),
+      appBarTheme: appBarTheme,
       cardTheme: CardTheme(
         color: secondaryBackgroundColor,
         shape: RoundedRectangleBorder(
@@ -441,7 +535,6 @@ class Typography {
       ),
       bodySmall: const TextStyle(
         fontSize: 13.0,
-        color: Color(0xFF8E8E8E),
         fontFamily: 'Jersey',
       ),
       labelLarge: const TextStyle(

@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         ),
       ],
       child: AppTheme(
-        themeData: AppThemeData.light(),
+        themeData: AppThemeData.system(context),
         child: BlocBuilder<L10nCubit, L10nState>(
           builder: (context, l10n) {
             return MaterialApp.router(
