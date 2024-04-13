@@ -1,5 +1,8 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -80,17 +83,17 @@ android {
     productFlavors { 
         production {
             dimension "default"
-            applicationIdSuffix ""
+            applicationId "com.production.app"
             manifestPlaceholders = [appName: "Template Flutter With Cubit By Very Good"]
         }
         staging {
             dimension "default"
-            applicationIdSuffix ".stg"
+            applicationId "com.staging.app"
             manifestPlaceholders = [appName: "[STG] Template Flutter With Cubit By Very Good"]
         }
         development {
             dimension "default"
-            applicationIdSuffix ".dev"
+            applicationId "com.development.app"
             manifestPlaceholders = [appName: "[DEV] Template Flutter With Cubit By Very Good"]
         }
     }
