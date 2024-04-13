@@ -11,7 +11,7 @@ part 'api_service.g.dart';
 @singleton
 abstract class PrivateApiService {
   @factoryMethod
-  factory PrivateApiService(@Named('privateApiClient') RestClient client) {
+  factory PrivateApiService(@Named('apiClient') RestClient client) {
     return _PrivateApiService(client.dio, baseUrl: client.baseUrl);
   }
 
