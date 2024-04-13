@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:template_flutter_with_cubit_by_very_good/src/data/entites/token_type.dart';
+
+import '../entites/token_type.dart';
 
 
 class Token {

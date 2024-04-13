@@ -3,9 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'package:injectable/injectable.dart';
-import 'package:template_flutter_with_cubit_by_very_good/src/data/entites/permission_role.dart';
 import 'package:template_flutter_with_cubit_by_very_good/src/routers/app_router.dart';
 import 'package:template_flutter_with_cubit_by_very_good/src/routers/guards.dart';
+
+import '../../network/entites/permission_role.dart';
 
 @module
 abstract class RoutesModule {
