@@ -17,6 +17,12 @@ class NoLogPrinter extends LogPrinter {
 @module
 abstract class AppModule {
   @development
+  @preResolve
+  @Named('appVersion')
+  Future<String> get developmentAppVersion async {
+    return 'DEV ${await Strings.appVersion()}';
+  }
+
   @staging
   @preResolve
   @Named('appVersion')
@@ -39,5 +45,5 @@ abstract class AppModule {
   }
 
   @Named('defaultLocale')
-  Locale get defaultLocale => const Locale('en');
+  Locale get defaultLocale => const Locale('ja');
 }

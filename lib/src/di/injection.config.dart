@@ -58,6 +58,12 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'apiUrl',
       registerFor: {_staging},
     );
+    await gh.factoryAsync<String>(
+      () => appModule.stagingAppVersion,
+      instanceName: 'appVersion',
+      registerFor: {_staging},
+      preResolve: true,
+    );
     gh.singleton<_i6.CacheOptions>(
       () => apiModule.cacheOptions(),
       instanceName: 'apiCache',
@@ -97,6 +103,12 @@ extension GetItInjectableX on _i1.GetIt {
         _staging,
       },
     );
+    await gh.factoryAsync<String>(
+      () => appModule.developmentAppVersion,
+      instanceName: 'appVersion',
+      registerFor: {_development},
+      preResolve: true,
+    );
     gh.factory<Uri>(
       () => apiModule.prodBaseUrl,
       instanceName: 'apiUrl',
@@ -106,15 +118,6 @@ extension GetItInjectableX on _i1.GetIt {
       () => appModule.prodAppVersion,
       instanceName: 'appVersion',
       registerFor: {_production},
-      preResolve: true,
-    );
-    await gh.factoryAsync<String>(
-      () => appModule.stagingAppVersion,
-      instanceName: 'appVersion',
-      registerFor: {
-        _development,
-        _staging,
-      },
       preResolve: true,
     );
     gh.factory<_i11.L10nCubit>(() => _i11.L10nCubit(

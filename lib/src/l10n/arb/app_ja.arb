@@ -1,0 +1,7 @@
+{
+    "@@locale": "ja",
+    "counterAppBarTitle": "カウンター",
+    "@counterAppBarTitle": {
+        "description": "カウンターページのAppBarに表示されるテキスト"
+    }
+}
