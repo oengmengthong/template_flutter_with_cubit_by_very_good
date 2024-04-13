@@ -22,13 +22,13 @@ To run the desired flavor either use the launch configuration in VSCode/Android 
 
 ```sh
 # Development
-$ flutter run --flavor development --target lib/src/main_development.dart
+$ flutter run --flavor development --target lib/main_development.dart
 
 # Staging
-$ flutter run --flavor staging --target lib/src/main_staging.dart
+$ flutter run --flavor staging --target lib/main_staging.dart
 
 # Production
-$ flutter run --flavor production --target lib/src/main_production.dart
+$ flutter run --flavor production --target lib/main_production.dart
 ```
 
 _\*Template Flutter With Cubit By Very Good works on iOS, Android, Web, and Windows._

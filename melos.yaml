@@ -37,3 +37,12 @@ scripts:
     run: |
       melos exec -- \ spider build && \
       melos exec -- \ fvm flutter pub run icon_font_generator:generator
+  run:debug:dev:
+    description: "Run the app in debug mode"
+    run: fvm flutter run --flavor development --target lib/main_development.dart
+  run:debug:staging:
+    description: "Run the app in debug mode"
+    run: fvm flutter run --flavor staging --target lib/main_staging.dart
+  run:debug:production:
+    description: "Run the app in debug mode"
+    run: fvm flutter run --flavor production --target lib/main_production.dart

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
@@ -9,12 +10,18 @@ part 'api_service.g.dart';
 
 @RestApi()
 @singleton
-abstract class PrivateApiService {
+abstract class ApiService {
   @factoryMethod
-  factory PrivateApiService(@Named('apiClient') RestClient client) {
-    return _PrivateApiService(client.dio, baseUrl: client.baseUrl);
+  factory ApiService(@Named('apiClient') RestClient client) {
+    return _ApiService(client.dio, baseUrl: client.baseUrl);
   }
 
   @GET(EndPoints.POST_LOGIN)
   Future<bool> login();
+}
+
+extension ApiServiceExts on ApiService {
+  RestClient get client {
+    return GetIt.I<RestClient>(instanceName: 'apiClient');
+  }
 }

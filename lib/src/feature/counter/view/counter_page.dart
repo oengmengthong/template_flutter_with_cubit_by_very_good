@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:template_flutter_with_cubit_by_very_good/src/feature/counter/counter.dart';
 import 'package:template_flutter_with_cubit_by_very_good/src/l10n/l10n.dart';
 
-@RoutePage()
+import '../../../shared/utils/routes.dart';
+
+@RoutePage(name: Routes.counterRoute)
 class CounterPage extends StatelessWidget {
   const CounterPage({super.key});
 

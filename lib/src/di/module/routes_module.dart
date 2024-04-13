@@ -34,6 +34,7 @@ abstract class RoutesModule {
       policies: {
         CounterRoute.name: [
           PermissionRole.user,
+          PermissionRole.guest,
         ],
       },
     );

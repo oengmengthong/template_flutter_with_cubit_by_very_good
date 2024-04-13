@@ -9,15 +9,18 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../network/api_service.dart' as _i7;
-import '../network/rest_client.dart' as _i6;
-import '../routers/app_router.dart' as _i5;
+import '../network/api_service.dart' as _i9;
+import '../network/rest_client.dart' as _i8;
+import '../routers/app_router.dart' as _i7;
 import '../routers/guards.dart' as _i4;
-import 'module/api_module.dart' as _i9;
-import 'module/routes_module.dart' as _i8;
+import '../shared/storage/storage.dart' as _i5;
+import 'module/api_module.dart' as _i12;
+import 'module/routes_module.dart' as _i11;
+import 'module/storage_module.dart' as _i10;
 
 const String _staging = 'staging';
 const String _production = 'production';
@@ -34,26 +37,41 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
+    final storageModule = _$StorageModule();
     final routesModule = _$RoutesModule();
     final apiModule = _$ApiModule();
+    gh.factory<String>(() => storageModule.storagePrefixKey);
     gh.factory<List<_i3.AutoRoute>>(() => routesModule.routes);
     gh.singleton<_i4.RoleGuard>(() => routesModule.roleGuard);
+    gh.singleton<_i5.Storage>(
+      () => storageModule.allPurposedStorage,
+      instanceName: 'storage',
+    );
     gh.factory<Uri>(
       () => apiModule.stagingBaseUrl,
       instanceName: 'apiUrl',
       registerFor: {_staging},
     );
+    gh.singleton<_i6.CacheOptions>(
+      () => apiModule.cacheOptions(),
+      instanceName: 'apiCache',
+    );
+    gh.singleton<_i5.Storage>(
+      () => storageModule.authzStorage,
+      instanceName: 'authStorage',
+    );
     gh.singleton<Duration>(
       () => apiModule.requestTimeout,
       instanceName: 'requestTimeout',
     );
-    gh.singleton<_i5.AppRouter>(() => routesModule.appRouter(
+    gh.singleton<_i7.AppRouter>(() => routesModule.appRouter(
           gh<_i4.RoleGuard>(),
           gh<List<_i3.AutoRoute>>(),
         ));
-    gh.singleton<_i6.RestClient>(
+    gh.lazySingleton<_i8.RestClient>(
       () => apiModule.restClient(
         gh<Uri>(instanceName: 'apiUrl'),
+        gh<_i6.CacheOptions>(instanceName: 'apiCache'),
         gh<Duration>(instanceName: 'requestTimeout'),
       ),
       instanceName: 'apiClient',
@@ -68,12 +86,14 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'apiUrl',
       registerFor: {_development},
     );
-    gh.singleton<_i7.PrivateApiService>(() =>
-        _i7.PrivateApiService(gh<_i6.RestClient>(instanceName: 'apiClient')));
+    gh.singleton<_i9.ApiService>(
+        () => _i9.ApiService(gh<_i8.RestClient>(instanceName: 'apiClient')));
     return this;
   }
 }
 
-class _$RoutesModule extends _i8.RoutesModule {}
+class _$StorageModule extends _i10.StorageModule {}
 
-class _$ApiModule extends _i9.ApiModule {}
+class _$RoutesModule extends _i11.RoutesModule {}
+
+class _$ApiModule extends _i12.ApiModule {}

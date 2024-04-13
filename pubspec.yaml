@@ -28,6 +28,21 @@ dependencies:
   auto_route: ^8.0.3
   flutter_lints: ^3.0.2
   import_sorter: ^4.6.0
+  file_picker: ^8.0.0+1
+  image_picker: ^1.0.8
+  jiffy: ^6.2.1
+  image_cropper: ^5.0.1
+  clipboard: ^0.1.3
+  url_launcher: ^6.2.6
+  package_info_plus: ^7.0.0
+  bot_toast: ^4.1.3
+  keyboard_dismisser: ^3.0.0
+  webview_flutter: ^4.7.0
+  animations: ^2.0.11
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.3
+  flutter_disk_lru_cache: ^1.0.1
+  logger: ^1.4.0
 
 dev_dependencies:
   bloc_test: ^9.1.6

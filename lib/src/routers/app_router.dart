@@ -24,7 +24,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       resolver.next(true);
     } else {
       // if the user is not allowed to access the route, redirect to the LoginRoute
-      // resolver.redirect(const LoginRoute());
+      resolver.redirect(const CounterRoute());
 
       _authListener = () async {
         final resolved = await roleGuard.resolve(resolver.route.name);
@@ -32,23 +32,23 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
           router.popUntilRoot();
           resolver.next(true);
 
-          // unsubscribeAuthListener();
+          unsubscribeAuthListener();
         }
       };
       // _authz.addListener(_authListener!);
     }
   }
 
-  // @override
-  // void dispose() {
-  //   unsubscribeAuthListener();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    unsubscribeAuthListener();
+    super.dispose();
+  }
 
-  // void unsubscribeAuthListener() {
-  //   if (_authListener != null) {
-  //     _authz.removeListener(_authListener!);
-  //     _authListener = null;
-  //   }
-  // }
+  void unsubscribeAuthListener() {
+    if (_authListener != null) {
+      // _authz.removeListener(_authListener!);
+      _authListener = null;
+    }
+  }
 }
